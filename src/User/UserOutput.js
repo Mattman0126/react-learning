@@ -1,14 +1,17 @@
 import React from 'react';
+import './User.css';
 
 
-class UserOutput extends Component {
+const UserOutput = ( props ) => {
     return (
-        <div>
-            <p></p>
-            <p></p>
+        <div className="User">
+            <p>Username: {props.username}</p>
+            <p>{props.other}</p>
         </div>
 
     )
 };
+
+export default UserOutput;
 
 

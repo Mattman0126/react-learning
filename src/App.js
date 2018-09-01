@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './User/UserInput';
+import UserOutput from './User/UserOutput';
 
 class App extends Component {
 
@@ -11,7 +13,9 @@ class App extends Component {
       {name: "Manu", age:"29"},
       {name:"Stephanie", age:"26"}
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+
+    username: 'mpeterso'
   }
 
   switchNameHandler = (newName) => {
@@ -38,15 +42,38 @@ class App extends Component {
   } )
   }
 
+  switchOutput = (event) => {
+
+    //console.log('input was changed!');
+    this.setState({
+      username: event.target.value
+    })
+  }
+
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
     return (
 
       //reminder that the .bind method of passing references to methods is preferred as the below passing of a function with new props tends to allow for react to render that portion too often
       <div className="App">
+        <UserInput changed={this.switchOutput.bind(this)}
+                    value={this.state.username}/>
+        <UserOutput username={this.state.username}/>
+        <UserOutput other='some text'/>
+        <UserOutput other='some other text'/>
+
         <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button onClick={() => {this.switchNameHandler('Matthew!!')}}>Switch Name1</button> 
-        <Person 
+         <p>This is really working!</p>
+         <button 
+          style={style}
+          onClick={() => {this.switchNameHandler('Matthew!!')}}>Switch Name1</button> 
+         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}/>
         <Person 
@@ -65,6 +92,8 @@ class App extends Component {
     )
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Does this work now?'));
   }
+
+  
 }
 
 export default App;
