@@ -8,7 +8,6 @@ const UserOutput = ( props ) => {
             <p>Username: {props.username}</p>
             <p>{props.other}</p>
         </div>
-
     )
 };
 
